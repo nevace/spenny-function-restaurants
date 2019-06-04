@@ -1,0 +1,4 @@
+assets/*/**
+dist/*/**
+gulp_tasks
+src/scripts/libs
