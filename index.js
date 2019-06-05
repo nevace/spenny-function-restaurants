@@ -40,7 +40,14 @@ async function getRestaurantData(id) {
 function updateFirestore(id, data) {
   const restaurantData = {
     name: data.name,
-    location: data.location,
+    location: {
+      address: data.location.address,
+      locality: data.location.locality,
+      localityVerbose: data.location.locality_verbose,
+      city: data.location.city,
+      geo: new Firestore.GeoPoint(parseFloat(data.location.latitude), parseFloat(data.location.longitude)),
+      postcode: data.location.zipcode
+    },
     priceRange: data.price_range,
     thumbnail: data.thumb,
     featuredImage: data.featured_image,
@@ -55,31 +62,6 @@ function updateFirestore(id, data) {
   } catch (err) {
     console.error(err);
   }
-
 }
 
-getRestaurants();
-
-// exports.main = (req, res) => {
-
-//
-//   // .add() will automatically assign an id
-//   return firestore
-//     .collection(COLLECTION_NAME)
-//     .add({
-//       created,
-//       ttl,
-//       ciphertext
-//     })
-//     .then(doc => {
-//       console.info('stored new doc id#', doc.id);
-//       return res.status(200).send(doc);
-//     })
-//     .catch(err => {
-//       console.error(err);
-//       return res.status(404).send({
-//         error: 'unable to store',
-//         err
-//       });
-//     });
-// };
+exports.main = () => getRestaurants();
