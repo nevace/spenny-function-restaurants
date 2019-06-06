@@ -51,7 +51,8 @@ function updateFirestore(id, data) {
     priceRange: data.price_range,
     thumbnail: data.thumb,
     featuredImage: data.featured_image,
-    cuisines: data.cuisines ? data.cuisines.split() : ''
+    cuisines: data.cuisines ? data.cuisines.split() : '',
+    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
   };
 
   try {
