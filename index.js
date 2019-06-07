@@ -1,4 +1,5 @@
 const Firestore = require('@google-cloud/firestore');
+const firebaseAdmin = require('firebase-admin');
 const fetch = require('node-fetch');
 
 const firestore = new Firestore({ projectId: 'spennyapp' });
@@ -52,7 +53,7 @@ function updateFirestore(id, data) {
     thumbnail: data.thumb,
     featuredImage: data.featured_image,
     cuisines: data.cuisines ? data.cuisines.split() : '',
-    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    updatedAt: firebaseAdmin.firestore.FieldValue.serverTimestamp()
   };
 
   try {
